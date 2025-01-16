@@ -6,8 +6,8 @@ import User from "../../../models/User";
 const handler = NextAuth({
   providers: [
     GitHubProvider({
-      clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET,
+      clientId: 'Ov23liwuOb3dzzBJosSO',
+      clientSecret: '88c6e7a4fa2cdb13a17070d52d92ad82cf2c9b4c',
     })
   ],
   callbacks: {
