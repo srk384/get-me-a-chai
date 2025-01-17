@@ -12,10 +12,6 @@ const handler = NextAuth({
   ],
   secret: process.env.NEXTAUTH_SECRET, 
   callbacks: {
-async redirect({ url, baseUrl }) {
-    console.log("Redirect URL:", url);
-    return url.startsWith(baseUrl) ? url : baseUrl;
-  },
     async signIn({ user, account }) {
       if (account.provider === "github") {
         await connectdb();
