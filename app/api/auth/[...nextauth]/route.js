@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import connectdb from "@/app/db/connectdb";
 import User from "../../../models/User";
+import mongoose from "mongoose";
 
 const handler = NextAuth({
   providers: [
@@ -42,16 +43,16 @@ const handler = NextAuth({
       return false; // Deny sign-in for unsupported providers
     },
 
-    async session({ session }) {
-      // Fetch the user's data from the database
-      await connectdb();
-      const dbUser = await User.findOne({ email: session.user.email });
+    // async session({ session }) {
+    //   // Fetch the user's data from the database
+    //   await connectdb();
+    //   const dbUser = await User.findOne({ email: session.user.email });
 
-      if (dbUser) {
-        session.user.name = dbUser.username;
-      }
-      return session;
-    },
+    //   if (dbUser) {
+    //     session.user.name = dbUser.username;
+    //   }
+    //   return session;
+    // },
   },
 });
 
