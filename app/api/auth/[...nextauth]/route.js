@@ -10,8 +10,8 @@ const handler = NextAuth({
       clientSecret: process.env.GITHUB_SECRET,
     })
   ],
-  secret: process.env.NEXTAUTH_SECRET,
-  debug: process.env.NODE_ENV !== "production",
+  secret: process.env.NEXTAUTH_SECRET, 
+  debug: true,
   callbacks: {
     async signIn({ user, account }) {
       if (account.provider === "github") {
