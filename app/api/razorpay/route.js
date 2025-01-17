@@ -7,7 +7,7 @@ export const POST = async (req, res) => {
     await connectDb();
     let body = await req.formData()
     body = Object.fromEntries(body)
-    console.log(body);
+    // console.log(body);
 
     // check if razorpayOrderId is present on our server
     let p = await Payment.findOne({ oid: body.razorpay_order_id })

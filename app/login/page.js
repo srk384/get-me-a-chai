@@ -15,7 +15,7 @@ const page = () => {
         }else{
             router.push("/login");
         }
-        console.log(session);
+        // console.log(session);
         
     }, [session, router]);
 

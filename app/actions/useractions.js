@@ -25,13 +25,13 @@ export const fetchUser = async (username) => {
     let user = await User.findOne({ username }).lean();
 
     // console.log(user)
-    return user;
+    return JSON.parse(JSON.stringify(user));
 }
 export const fetchPayment = async (username) => {
     await connectDb();
     let payments = await Payment.find({ to_user: username, done: true }).sort({ amount: -1 }).lean()
     // console.log(payment)
-    return payments;
+    return JSON.parse(JSON.stringify(payments));
 }
 export const updateProfile = async (oldusername, form) => {
     await connectDb();

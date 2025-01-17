@@ -51,7 +51,7 @@ const dashboard = () => {
 
     const handleSubmit = async (form) => {
         const result = await updateProfile(session.user.name, form);
-        console.log(session)
+        // console.log(session)
         if (result && result.acknowledged) {
             localStorage.setItem("showToast", "true");
             window.location.reload();
