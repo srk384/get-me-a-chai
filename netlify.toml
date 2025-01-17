@@ -4,5 +4,8 @@
 
 [functions]
   node_bundler = "esbuild"
-  included_files = ["./**/*"]
   timeout = 26
+
+  [[functions]]
+  path = "/api/*"
+  timeout = 30  # Set different timeout for specific functions if necessary
