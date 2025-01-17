@@ -2,7 +2,6 @@ import NextAuth from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import connectdb from "@/app/db/connectdb";
 import User from "../../../models/User";
-import mongoose from "mongoose";
 
 const handler = NextAuth({
   providers: [
@@ -11,12 +10,12 @@ const handler = NextAuth({
       clientSecret: process.env.GITHUB_SECRET,
     })
   ],
-  secret: process.env.NEXTAUTH_SECRET, 
- 
+  secret: process.env.NEXTAUTH_SECRET,
+  debug: process.env.NODE_ENV !== "production",
   callbacks: {
     async signIn({ user, account }) {
       if (account.provider === "github") {
-         await mongoose.connect(process.env.MONGO_URI)
+        await connectdb();
 
         // Use `user.email` instead of `email`
         const currentUser = await User.findOne({ email: user.email });
@@ -43,16 +42,16 @@ const handler = NextAuth({
       return false; // Deny sign-in for unsupported providers
     },
 
-    // async session({ session }) {
-    //   // Fetch the user's data from the database
-    //   await connectdb();
-    //   const dbUser = await User.findOne({ email: session.user.email });
+    async session({ session }) {
+      // Fetch the user's data from the database
+      await connectdb();
+      const dbUser = await User.findOne({ email: session.user.email });
 
-    //   if (dbUser) {
-    //     session.user.name = dbUser.username;
-    //   }
-    //   return session;
-    // },
+      if (dbUser) {
+        session.user.name = dbUser.username;
+      }
+      return session;
+    },
   },
 });
 
