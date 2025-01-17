@@ -1,3 +1,7 @@
- [functions]
-  path = "/api/*"
-  timeout = 30
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[functions]
+  node_bundler = "esbuild"
+  timeout = 26
