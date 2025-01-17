@@ -45,5 +45,5 @@ export const updateProfile = async (oldusername, form) => {
     }
     let updatedUser = await User.updateOne({ email: nform.email }, nform);
     let updatedPayments = await Payment.updateMany({ to_user: oldusername }, { to_user: nform.username });
-    return updatedUser, updatedPayments;
+    return  JSON.parse(JSON.stringify(updatedUser,updatedPayments));
 }
