@@ -6,7 +6,7 @@ import { fetchUser, fetchPayment, updateProfile } from '../actions/useractions'
 import { ToastContainer, toast } from 'react-toastify';
 import { useSearchParams, useRouter } from 'next/navigation'
 import { Bounce } from 'react-toastify'
-import { useSession} from "next-auth/react"
+import { useSession } from "next-auth/react"
 
 const PaymentPage = ({ username }) => {
     const [paymentform, setpaymentform] = useState({})
@@ -90,12 +90,12 @@ const PaymentPage = ({ username }) => {
     }
 
     if (session === undefined) {
-    return (
-        <div className="flex items-center justify-center h-screen">
-            <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
-        </div>
-    );
-}
+        return (
+            <div className="flex items-center justify-center h-screen">
+                <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
+            </div>
+        );
+    }
     if (session) {
         return (
             <>
@@ -125,9 +125,9 @@ const PaymentPage = ({ username }) => {
                         <div className='text-base md:text-xl font-bold text-center m-4'>Make Contribution</div>
                         {/* enter name message and amount enter custom amount like $10,$5,$15 */}
                         <div className='p-2 px-5 space-y-3 text-sm md:text-base'>
-                            <input required onChange={chnageHandle} value={paymentform.name} name='name' type="text" placeholder='Name *' className='w-full p-2 rounded-lg bg-slate-700 ' />
-                            <input onChange={chnageHandle} value={paymentform.message} name='message' type="text" placeholder='Message' className='w-full p-2 rounded-lg bg-slate-700' />
-                            <input required onChange={chnageHandle} value={paymentform.amount} name='amount' type="text" placeholder='Amount *' className='w-full p-2 rounded-lg bg-slate-700' />
+                            <input required onChange={chnageHandle} value={paymentform.name ?? ""} name='name' type="text" placeholder='Name *' className='w-full p-2 rounded-lg bg-slate-700 ' />
+                            <input onChange={chnageHandle} value={paymentform.message ?? ""} name='message' type="text" placeholder='Message' className='w-full p-2 rounded-lg bg-slate-700' />
+                            <input required onChange={chnageHandle} value={paymentform.amount ?? ""} name='amount' type="text" placeholder='Amount *' className='w-full p-2 rounded-lg bg-slate-700' />
                             <button className='bg-white text-black font-semibold px-4 py-2 rounded-lg mx-1 disabled:bg-slate-700 disabled:text-slate-400 cursor-pointer disabled:cursor-not-allowed ' onClick={() => pay(100)} disabled={!paymentform.name || paymentform.name.length < 3} >Pay ₹100</button>
                             <button className='bg-white text-black font-semibold px-4 py-2 rounded-lg mx-1 disabled:bg-slate-700 disabled:text-slate-400 cursor-pointer disabled:cursor-not-allowed ' onClick={() => pay(200)} disabled={!paymentform.name || paymentform.name.length < 3} >Pay ₹200</button>
                             <button className='bg-white text-black font-semibold px-4 py-2 rounded-lg mx-1 disabled:bg-slate-700 disabled:text-slate-400 cursor-pointer disabled:cursor-not-allowed ' onClick={() => pay(300)} disabled={!paymentform.name || paymentform.name.length < 3} >Pay ₹300</button>

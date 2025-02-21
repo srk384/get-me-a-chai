@@ -8,7 +8,7 @@ export const initiate = async (amount, username, Paymentform) => {
     await connectDb();
     let user = await User.findOne({ username: username }).lean();
 
-    var instance = new Razorpay({ key_id: user.razorpayid, key_secret: user.razorpaysecret })
+    var instance = new Razorpay({ key_id: user.razorpayid ?? process.env.NEXT_PUBLIC_KEY_ID, key_secret: user.razorpaysecret ?? process.env.KEY_SECRET  })
 
     let options = {
         amount: amount * 100,
