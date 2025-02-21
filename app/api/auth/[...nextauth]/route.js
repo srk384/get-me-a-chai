@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
 import connectdb from "@/app/db/connectdb";
 import User from "../../../models/User";
 
@@ -8,16 +9,19 @@ const handler = NextAuth({
     GitHubProvider({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
     })
   ],
   secret: process.env.NEXTAUTH_SECRET,
   debug: process.env.NODE_ENV !== "production",
   callbacks: {
     async signIn({ user, account }) {
-      if (account.provider === "github") {
+      if (account.provider === "github"||"google") {
         await connectdb();
 
-        // Use `user.email` instead of `email`
         const currentUser = await User.findOne({ email: user.email });
         // console.log(`currentUser: ${currentUser}`);
 

@@ -23,9 +23,15 @@ const page = () => {
         return (
             <>
                 <div className='text-white min-h-[87.4vh]'>
-                    <div className='flex flex-col justify-center items-center h-[45vh] gap-4'>
+                    <div className='flex flex-col justify-center items-center mt-28 gap-5'>
                         <button onClick={() => { signIn("github") }} className='bg-white hover:bg-slate-200 text-black font-bold py-2 px-4 rounded flex items-center'>
                             <img src='/github.png' alt='GitHub Logo' className='' width={180} />
+                        </button>
+                        <button onClick={() => { signIn("google") }} className='bg-white hover:bg-slate-200 text-black font-bold py-1 px-4 rounded flex items-center'>
+                            <img src='./google.png' alt='Google Logo' className='' width={180} />
+                        </button>
+                        <button className='bg-white hover:bg-slate-200 text-black font-bold py-4 px-9 rounded flex items-center'>
+                            <img src='./guest.png' alt='Guest Logo' className='' width={50} />Guest Login
                         </button>
                     </div>
                 </div>
@@ -34,15 +40,7 @@ const page = () => {
     }
 
 
-    // return (
-    //     <div className='text-white min-h-[87.4vh]'>
-    //         <div className='flex flex-col justify-center items-center h-[45vh] gap-4'>
-    //             <button onClick={() => { signIn("github") }} className='bg-white hover:bg-slate-200 text-black font-bold py-2 px-4 rounded flex items-center'>
-    //                 <img src='/github.png' alt='GitHub Logo' className='' width={180} />
-    //             </button>
-    //         </div>
-    //     </div>
-    // )
+   
     return null
 }
 
