@@ -8,7 +8,7 @@ import { Bounce } from 'react-toastify'
 
 const dashboard = () => {
     const [form, setform] = useState({})
-    const { data: session, update } = useSession()
+    const { data: session } = useSession()
     const router = useRouter()
 
     useEffect(() => {
@@ -19,7 +19,7 @@ const dashboard = () => {
         } else {
             router.push("/login");
         }
-    }, [session, router]);
+    }, [session]);
 
     useEffect(() => {
         if (localStorage.getItem("showToast") === "true") {
@@ -74,10 +74,10 @@ const dashboard = () => {
     if (session) {
         return (
             <div>
-                <div className="flex flex-col justify-center items-center">
+                <div>
                     <h2 className="text-xl md:text-2xl font-bold text-center p-10">Welcome to your Dashboard</h2>
                     {/* input for name, urname, email, profile pic, cover pic ,razorpay id, razorpay secret and a save button */}
-                    <form action={handleSubmit} className="flex flex-col gap-1 items-center text-sm md:text-base">
+                    <form action={handleSubmit} className="flex flex-col gap-1 items-center text-sm md:text-base mb-40">
                         <div>
                             <div htmlFor="name" className="text-gray-200">Name</div>
                             <input onChange={handleChange} value={form.name} type="text" name="name" id="name" placeholder="Your Name" className="border p-2 rounded w-80 md:w-96 bg-slate-700 border-none" />

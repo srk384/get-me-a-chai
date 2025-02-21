@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
 import connectdb from "@/app/db/connectdb";
 import User from "../../../models/User";
 
@@ -13,17 +14,27 @@ const handler = NextAuth({
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
+    }),
+    CredentialsProvider({
+      async authorize() {
+        const user = { email: "guest@example.com", image: "https://ui-avatars.com/api/?name=GU&background=random" }
+
+        if (user) {
+          return user
+        } else {
+          return null
+        }
+      }
     })
   ],
   secret: process.env.NEXTAUTH_SECRET,
   debug: process.env.NODE_ENV !== "production",
   callbacks: {
     async signIn({ user, account }) {
-      if (account.provider === "github"||"google") {
+      if (account.provider === "github" || "google") {
         await connectdb();
 
         const currentUser = await User.findOne({ email: user.email });
-        // console.log(`currentUser: ${currentUser}`);
 
         if (!currentUser) {
           // Create a new user
@@ -31,14 +42,11 @@ const handler = NextAuth({
             email: user.email,
             username: user.email.split("@")[0],
           });
-          // console.log(`New user created: ${newUser}`);
         } else {
-          // Optionally update existing user fields here
           await User.findOneAndUpdate(
             { email: user.email },
-            { updatedAt: new Date() } // Set updatedAt to the current time
+            { updatedAt: new Date() } 
           );
-          // console.log(`User already exists: ${currentUser}`);
         }
 
         return true; // Allow sign-in

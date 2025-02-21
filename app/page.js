@@ -29,8 +29,8 @@ export default function Home() {
   // }
     return (
       <>
-        <div className="min-h-[87.4vh] text-white">
-          <div className="flex flex-col justify-center items-center h-[45vh] gap-4">
+        <div className="text-white">
+          <div className="flex flex-col justify-center items-center mt-32 mb-32 gap-4">
             <div className="font-bold text-4xl flex items-center">Buy Me a Chai
               <span><img src="./chai2.gif" alt="" width={70} /></span>
             </div>
@@ -42,7 +42,7 @@ export default function Home() {
           </div>
           <div className="h-[1px] bg-slate-700"></div>
           <div>
-            <div className="flex flex-col justify-center h-[45vh] container mx-auto gap-6 p-2 text-center">
+            <div className="flex flex-col justify-center mb-20 mt-20 container mx-auto gap-6 p-2 text-center">
               <div className="text-xl md:text-2xl font-bold text-center">Your fans can buy you a Chai</div>
               <div className="flex justify-around gap-1.5">
                 <div className="flex flex-col items-center gap-2">
@@ -66,7 +66,7 @@ export default function Home() {
           <div className="h-[1px] bg-slate-700"></div>
           <div className="mb-6 md:mb-2">
             <div className="text-xl md:text-2xl font-bold text-center mt-10 md:mt-20">Learn more about the Platform</div>
-            <div className="flex justify-center items-center h-[45vh] p-1">
+            <div className="flex justify-center items-center mb-20 mt-20 p-1">
               <iframe width="560" height="315" src="https://www.youtube.com/embed/rwvUjAv6pxg?si=KWIwXgj0lFEOC0M4" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
             </div>
           </div>

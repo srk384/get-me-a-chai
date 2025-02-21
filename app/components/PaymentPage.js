@@ -100,7 +100,7 @@ const PaymentPage = ({ username }) => {
         return (
             <>
                 <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
-                <div className='relative w-full md:h-[40vh] h-[25vh]'>
+                <div className='relative w-full h-56 md:h-96'>
                     <img src={currentUser.coverpic} alt="" className="object-cover w-full h-full" />
                     <img className='absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-lg h-28 w-28 object-cover' src={currentUser.profilepic} alt="" />
                 </div>
@@ -114,8 +114,8 @@ const PaymentPage = ({ username }) => {
                 <div className='text-center mt-6'>
                     <span className='bg-pink-600 px-4 py-3 rounded-lg font-semibold text-sm md:text-base'>Become a member</span>
                 </div>
-                <div className='md:w-4/5 flex min-h-60 gap-2 justify-center mx-auto mt-6 mb-6 flex-col-reverse md:flex-row px-1'>
-                    <div className='md:w-[35%] bg-slate-800 rounded-lg'>
+                <div className='md:w-4/5 flex min-h-60 gap-2 justify-center mx-auto mt-6 mb-8 pb-6 flex-col-reverse md:flex-row px-2'>
+                    <div className='md:w-[35%] bg-slate-800 rounded-lg pb-6'>
                         <div className='text-base md:text-xl font-bold text-center m-4'>Supporter's Contribution</div>
                         <ul className='p-2 px-5 space-y-4'>
                             {payments.slice(0, 5).map((item, index) => (<li key={index} className="flex items-center gap-2 text-sm md:text-base"><img src="/avatar.gif" alt="Avatar" width={30} /><span>{item.name} contributed <span className="font-bold">₹{item.amount}</span> with a message "{item.message}"</span></li>))}

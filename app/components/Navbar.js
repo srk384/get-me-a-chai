@@ -22,7 +22,7 @@ const Navbar = () => {
             </div>}
 
 
-            {session && <><button onClick={() => setshowDropdown(!showDropdown)} onBlur={() => { setTimeout(() => { setshowDropdown(false) }, 300) }} id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar" className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" type="button">
+            {session && <><button onClick={() => setshowDropdown(!showDropdown)} onBlur={() => { setTimeout(() => { setshowDropdown(false) }, 300) }} id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar" className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 transition" type="button">
                 <span className="sr-only">Open user menu</span>
                 <img className="h-8 w-8 md:w-12 md:h-12 rounded-full" src={session.user.image} alt="user photo" />
             </button>
