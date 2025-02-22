@@ -35,15 +35,28 @@ export const fetchPayment = async (username) => {
 }
 export const updateProfile = async (oldusername, form) => {
     await connectDb();
-    // console.log(form);
-    let nform = Object.fromEntries(form)
-    // console.log(nform);
-    let user = await User.findOne({ username: nform.username });
-    // console.log("findone:" + user);
-    if (user && user.username == oldusername ) {
-        return { error: "Username already exists" }
+
+    let nform = Object.fromEntries(form);
+
+    let existingUser = await User.findOne({ email: nform.email });
+
+    if (!existingUser) {
+        return { error: "User not found" };
     }
+
+    if (nform.username && nform.username !== oldusername) {
+        let usernameExists = await User.findOne({ username: nform.username });
+
+        if (usernameExists) {
+            return { error: "Username already exists" };
+        }
+    }
+
     let updatedUser = await User.updateOne({ email: nform.email }, nform);
-    let updatedPayments = await Payment.updateMany({ to_user: oldusername }, { to_user: nform.username });
-    return  JSON.parse(JSON.stringify(updatedUser,updatedPayments));
-}
+
+    if (nform.username && nform.username !== oldusername) {
+        await Payment.updateMany({ to_user: oldusername }, { to_user: nform.username });
+    }
+
+    return JSON.parse(JSON.stringify(updatedUser));
+};

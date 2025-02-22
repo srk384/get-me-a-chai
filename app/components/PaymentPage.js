@@ -123,7 +123,7 @@ const PaymentPage = ({ username }) => {
                     </div>
                     <div className='md:w-[35%] bg-slate-800 rounded-lg'>
                         <div className='text-base md:text-xl font-bold text-center m-4'>Make Contribution</div>
-                        {/* enter name message and amount enter custom amount like $10,$5,$15 */}
+                        
                         <div className='p-2 px-5 space-y-3 text-sm md:text-base'>
                             <input required onChange={chnageHandle} value={paymentform.name ?? ""} name='name' type="text" placeholder='Name *' className='w-full p-2 rounded-lg bg-slate-700 ' />
                             <input onChange={chnageHandle} value={paymentform.message ?? ""} name='message' type="text" placeholder='Message' className='w-full p-2 rounded-lg bg-slate-700' />
