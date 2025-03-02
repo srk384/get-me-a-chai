@@ -15,6 +15,7 @@ const PaymentPage = ({ username }) => {
     const searchParams = useSearchParams()
     const router = useRouter()
     const { data: session } = useSession()
+    const [isClicked, setisClicked] = useState(false)
 
     useEffect(() => {
         // Check if session is undefined (still loading)
@@ -91,14 +92,14 @@ const PaymentPage = ({ username }) => {
 
     if (session === undefined) {
         return (
-            <div className="flex items-center justify-center h-screen">
+            <div className="flex items-center justify-center min-h-[87.5vh]">
                 <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
             </div>
         );
     }
     if (session) {
         return (
-            <>
+            (<>
                 <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
                 <div className='relative w-full h-56 md:h-96'>
                     <img src={currentUser.coverpic} alt="" className="object-cover w-full h-full" />
@@ -123,22 +124,26 @@ const PaymentPage = ({ username }) => {
                     </div>
                     <div className='md:w-[35%] bg-slate-800 rounded-lg'>
                         <div className='text-base md:text-xl font-bold text-center m-4'>Make Contribution</div>
-                        
+
                         <div className='p-2 px-5 space-y-3 text-sm md:text-base'>
                             <input required onChange={chnageHandle} value={paymentform.name ?? ""} name='name' type="text" placeholder='Name *' className='w-full p-2 rounded-lg bg-slate-700 ' />
                             <input onChange={chnageHandle} value={paymentform.message ?? ""} name='message' type="text" placeholder='Message' className='w-full p-2 rounded-lg bg-slate-700' />
                             <input required onChange={chnageHandle} value={paymentform.amount ?? ""} name='amount' type="text" placeholder='Amount *' className='w-full p-2 rounded-lg bg-slate-700' />
-                            <button className='bg-white text-black font-semibold px-4 py-2 rounded-lg mx-1 disabled:bg-slate-700 disabled:text-slate-400 cursor-pointer disabled:cursor-not-allowed ' onClick={() => pay(100)} disabled={!paymentform.name || paymentform.name.length < 3} >Pay ₹100</button>
-                            <button className='bg-white text-black font-semibold px-4 py-2 rounded-lg mx-1 disabled:bg-slate-700 disabled:text-slate-400 cursor-pointer disabled:cursor-not-allowed ' onClick={() => pay(200)} disabled={!paymentform.name || paymentform.name.length < 3} >Pay ₹200</button>
-                            <button className='bg-white text-black font-semibold px-4 py-2 rounded-lg mx-1 disabled:bg-slate-700 disabled:text-slate-400 cursor-pointer disabled:cursor-not-allowed ' onClick={() => pay(300)} disabled={!paymentform.name || paymentform.name.length < 3} >Pay ₹300</button>
-                            <div className='text-center'>
-                                <button className='bg-pink-600 px-4 py-2 rounded-lg font-semibold m-4 disabled:bg-slate-700 disabled:text-slate-400 cursor-pointer disabled:cursor-not-allowed' onClick={() => pay(paymentform.amount)} disabled={!paymentform.name || paymentform.name.length < 3 || !paymentform.amount || paymentform.amount <= 0} >Contribute</button>
+
+                            <div className='flex items-center justify-center'>
+                                <button className='bg-white text-black font-semibold px-4 py-2 rounded-lg mx-1 group flex items-center justify-center h-[3rem] w-[7rem] disabled:bg-slate-700 disabled:text-slate-400 cursor-pointer disabled:cursor-not-allowed ' onClick={() => { pay(100); setisClicked(true) }} disabled={!paymentform.name || paymentform.name.length < 3 || isClicked} >{isClicked ? (<div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>) : "Pay ₹100"}</button>
+                                <button className='bg-white text-black font-semibold px-4 py-2 rounded-lg mx-1 group flex items-center justify-center h-[3rem] w-[7rem] disabled:bg-slate-700 disabled:text-slate-400 cursor-pointer disabled:cursor-not-allowed ' onClick={() => { pay(200); setisClicked(true) }} disabled={!paymentform.name || paymentform.name.length < 3 || isClicked} >{isClicked ? (<div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>) : "Pay ₹200"}</button>
+                                <button className='bg-white text-black font-semibold px-4 py-2 rounded-lg mx-1 group flex items-center justify-center h-[3rem] w-[7rem] disabled:bg-slate-700 disabled:text-slate-400 cursor-pointer disabled:cursor-not-allowed ' onClick={() => { pay(300); setisClicked(true) }} disabled={!paymentform.name || paymentform.name.length < 3 || isClicked} >{isClicked ? (<div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>) : "Pay ₹300"}</button>
+                            </div>
+
+                            <div className='flex justify-center items-center'>
+                                <button className='bg-pink-600 px-4 py-2 rounded-lg font-semibold m-4 group flex items-center justify-center h-[3rem] w-[10rem] disabled:bg-slate-700 disabled:text-slate-400 cursor-pointer disabled:cursor-not-allowed' onClick={() => { pay(paymentform.amount); setisClicked(true) }} disabled={!paymentform.name || paymentform.name.length < 3 || !paymentform.amount || paymentform.amount <= 0 || isClicked} >{isClicked ? (<div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>) : "Contribute"}</button>
                             </div>
                         </div>
 
                     </div>
                 </div>
-            </>
+            </>)
         )
     }
 }
