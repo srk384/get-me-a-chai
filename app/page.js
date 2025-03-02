@@ -30,9 +30,10 @@ export default function Home() {
     return (
       <>
         <div className="text-white">
-          <div className="flex flex-col justify-center items-center mt-32 mb-32 gap-4">
-            <div className="font-bold text-4xl flex items-center">Buy Me a Chai
-              <span><img src="./chai2.gif" alt="" width={70} /></span>
+          <div className="flex flex-col justify-center items-center mt-28 mb-28 gap-4 space-y-4">
+            <div className="flex items-center">
+              <span className="font-bold text-4xl md:text-6xl ">Buy Me a Chai</span>
+              <span><img src="./chai2.gif" alt=""  className="md:w-28 w-16"/></span>
             </div>
             <p className="text-center">A crowdfunding website to support your favorite creators and help them achieve their goals. Your contribution helps to keep the creativity flowing.</p>
             <div className="buttons">
